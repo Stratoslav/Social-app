@@ -1,0 +1,14 @@
+.Window{
+    text-align: center;
+    background: #53989b3d;
+    max-width: 550px;
+    width: 100%;
+    padding-top: 40px;
+    margin: 0px auto;
+    border-radius: 10px;
+}
+.Window_text{ 
+    max-width: 510px;
+    margin: 0 auto;
+    padding: 10px 0;
+}

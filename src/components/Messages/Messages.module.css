@@ -1,0 +1,25 @@
+.Messages {
+    display: grid;
+    grid-template-columns: 2fr 10fr;
+    grid-gap: 5px;
+}
+
+.Messages_Users{
+    background-color: #b3bdbd;
+    margin: 0 ;
+    padding: 20px 20px;
+    list-style: none;
+}
+.Messages_Link{
+    color: black;
+    text-decoration: none;
+}
+
+.Messages_Active{
+    color: aliceblue;
+}
+
+.Messages_Content {
+    font-size: 17px;
+    padding: 5px 0;
+}
