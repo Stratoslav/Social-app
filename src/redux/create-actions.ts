@@ -1,6 +1,6 @@
 import { ChatMessageType } from './../page/Chat/ChatPage';
 // import { createAction } from '@reduxjs/toolkit';
-import { FilterType, ProfileType, StatusType } from './create-reducer';
+import {  ProfileType, StatusType } from './create-reducer';
 
 export const actions = {
   ADD_POST: (text: string) =>

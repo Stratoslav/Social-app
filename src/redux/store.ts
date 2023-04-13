@@ -1,8 +1,9 @@
 import { configureStore, combineReducers } from '@reduxjs/toolkit';
 import { persistStore, persistReducer } from 'redux-persist'
 import storage from 'redux-persist/lib/storage'
-import { messageReducer, userReducer, profileReducer, findUsersReducer, authReducer, appReducer, chatReducer } from './create-reducer';
-import logger from 'redux-logger'
+import { messageReducer, userReducer , authReducer, appReducer, chatReducer } from './create-reducer';
+import { findUserReducer } from './slice/findUserSlice';
+import { profileReducer } from './slice/profileSlice';
 const persistConfig = {
   key: 'root',
   storage,
@@ -13,7 +14,7 @@ const rootReducer = combineReducers({
   profile: profileReducer,
   newMessage: messageReducer,
   users: userReducer,
-  findUsers: findUsersReducer,
+  findUsers: findUserReducer,
   auth: authReducer,
   app: appReducer,
 chat : chatReducer
@@ -34,5 +35,8 @@ const store = configureStore({
   middleware: (getDefaultMiddleware) => getDefaultMiddleware(),
 });
 
+export type RootState = ReturnType<typeof store.getState>
+// Inferred type: {posts: PostsState, comments: CommentsState, users: UsersState}
+export type AppDispatch = typeof store.dispatch
 const persistor = persistStore(store)
 export  {store, persistor};

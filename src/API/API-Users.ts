@@ -1,9 +1,9 @@
 import { PhotosType, UsersType } from '../redux/create-reducer';
 import { Action } from 'redux';
 import { ThunkAction } from 'redux-thunk';
-import { actions } from '../redux/create-actions';
 import { AppStateReducer } from '../redux/store';
 import { instance } from './API';
+import { findUserAction } from '../redux/slice/findUserSlice';
 
 type ThunkType = ThunkAction<void, AppStateReducer, unknown, Action<any>>;
 
@@ -22,17 +22,17 @@ export type DefaultType = {
 export const getUsers =
   (userCount = 10, currentPage = 1, term: string = ''): ThunkType =>
   async dispatch => {
-    dispatch(actions.SET_PRELOADER(true));
+    dispatch(findUserAction.setPreloader(true));
 
     let response = await instance.get<getUsersType>(
       `users?count=${userCount}&page=${currentPage}&term=${term}`,
     );
 
-    dispatch(actions.SET_PRELOADER(false));
-    dispatch(actions.SET_CURRENT_PAGE(currentPage));
-    dispatch(actions.SET_FILTER(term));
-    dispatch(actions.SET_TOTAL_COUNT(response.data.totalCount));
-    dispatch(actions.SET_USERS(response.data.items));
+    dispatch(findUserAction.setPreloader(false));
+    dispatch(findUserAction.setCurrentPage(currentPage));
+    dispatch(findUserAction.setFilter(term));
+    dispatch(findUserAction.setTotalCount(response.data.totalCount));
+    dispatch(findUserAction.setUsers(response.data.items));
   };
 
 export const getFollowUsers =
@@ -42,10 +42,10 @@ export const getFollowUsers =
       `follow/${id}`,
     );
     if (response.data.resultCode === 0) {
-      dispatch(actions.SET_PRELOADER(true));
-      dispatch(actions.FOLLOW_UNFOLLOW(id));
+      dispatch(findUserAction.setPreloader(true));
+      dispatch(findUserAction.followUnfollow(id));
       setTimeout(() => {
-        dispatch(actions.SET_PRELOADER(false));
+        dispatch(findUserAction.setPreloader(false));
       }, 1000);
     }
   };
@@ -57,6 +57,6 @@ export const getUnfollowUsers =
       `follow/${id}`,
     );
     if (response.data.resultCode === 0) {
-      dispatch(actions.FOLLOW_UNFOLLOW(id));
+      dispatch(findUserAction.followUnfollow(id));
     }
   };

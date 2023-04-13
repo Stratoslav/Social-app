@@ -43,12 +43,12 @@ export const App = () => {
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(initializedApp());
-  }, []);
+  }, [dispatch]);
 
   if (!initialized) {
     return <SpinnerLoader />;
   }
-  //tyjtjtyj
+
   return (
     <BrowserRouter>
       <Suspense fallback={'Loading...'}>

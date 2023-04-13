@@ -1,7 +1,6 @@
-
-import  axios from 'axios';
-import  {actions} from '../redux/create-actions';
-
+import axios from 'axios';
+import { actions } from '../redux/create-actions';
+import { profileAction } from '../redux/slice/profileSlice';
 
 export const instance = axios.create({
   withCredentials: true,
@@ -36,9 +35,9 @@ export const initializedApp = () => dispatch => {
   });
 };
 
-// type loginType = { 
+// type loginType = {
 //   data: object
-//   email: string, 
+//   email: string,
 //   password: string
 //   rememberMe: boolean
 //   captcha?: any
@@ -66,10 +65,13 @@ export const login =
     setFieldError,
     setStatus,
   ) =>
-   async dispatch => {
-    const response = await instance.post(`auth/login`
-     , { email,password,rememberMe,captcha,}
-    );
+  async dispatch => {
+    const response = await instance.post(`auth/login`, {
+      email,
+      password,
+      rememberMe,
+      captcha,
+    });
 
     if (response.data.resultCode === 0) {
       dispatch(getAuthorizationUser());
@@ -79,17 +81,15 @@ export const login =
     }
   };
 
-  // type getCaptchaUrlType = {
-  //   url: string
-  // }
+// type getCaptchaUrlType = {
+//   url: string
+// }
 
 export const getCaptchaUrl = () => async dispatch => {
   let response = await instance.get(`security/get-captcha-url`);
   const captchaUrl = response.data.url;
   dispatch(actions.GET_CAPTCHA_URL_SUCCESS(captchaUrl));
 };
-
-
 
 // type getUserPhotoType = {
 //   data: { small: string | null, large: string | null},
@@ -100,16 +100,13 @@ export const getCaptchaUrl = () => async dispatch => {
 export const getUserPhoto = photoFile => async dispatch => {
   const formData = new FormData();
   formData.append('image', photoFile);
-  let response = await instance.put('profile/photo',
-   formData, 
-   {
+  let response = await instance.put('profile/photo', formData, {
     headers: { 'Content-Type': 'multipart/form-data' },
-  }
-  );
+  });
   // <<<<<<<<<<<<<<MISTAKE>>>>>>>>>>>>>>>>>>>
   const ImageUrl = response.data.data.photos;
   if (response.data.resultCode === 0) {
-    dispatch(actions.SET_USER_PHOTO(ImageUrl));
+    dispatch(profileAction.setUserPhoto(ImageUrl));
   }
 };
 
@@ -128,13 +125,12 @@ export const logout = () => async dispatch => {
 
 export const setUserProfile = userId => async dispatch => {
   let response = await instance.get(`profile/${userId}`);
-  dispatch(actions.SET_USER_PROFILE(response.data));
+  dispatch(profileAction.setUserProfile(response.data));
 };
-
 
 export const getStatus = userId => async dispatch => {
   let response = await instance.get(`profile/status/${userId}`);
-  dispatch(actions.SET_STATUS(response.data));
+  dispatch(profileAction.setStatus(response.data));
 };
 
 // type updateStatusType = {
@@ -143,12 +139,10 @@ export const getStatus = userId => async dispatch => {
 //   data: {status: string | null}
 // }
 
-export const updateStatus = (status ) => async dispatch => {
-  let response = await instance.put(`profile/status`, 
-  { status: status }
-  );
+export const updateStatus = status => async dispatch => {
+  let response = await instance.put(`profile/status`, { status: status });
   if (response.data.resultCode === 0) {
-    dispatch(actions.SET_STATUS(status));
+    dispatch(profileAction.setStatus(status));
   }
 };
 
@@ -159,31 +153,27 @@ export const updateStatus = (status ) => async dispatch => {
 
 // }
 
-
 export const saveProfile =
-  ( 
-    setFieldError ,
-    setSubmitting ,
-    setStatus ,
-    fullName  ,
-    aboutMe  ,
-    lookingForAJobDescription  ,
-    lookingForAJob ,
-    contacts ,
-   
+  (
+    setFieldError,
+    setSubmitting,
+    setStatus,
+    fullName,
+    aboutMe,
+    lookingForAJobDescription,
+    lookingForAJob,
+    contacts,
   ) =>
   async (dispatch, getState) => {
     const userId = getState().auth.userId;
-    let response = await instance.put(`profile`,
-     {
+    let response = await instance.put(`profile`, {
       fullName,
       aboutMe,
       lookingForAJobDescription,
       lookingForAJob,
       contacts,
-    }
-    );
-    
+    });
+
     if (response.data.resultCode === 0) {
       dispatch(setUserProfile(userId));
     } else if (response.data.resultCode === 1) {

@@ -117,67 +117,33 @@ export const messageReducer = (
   }
 };
 
-export const findUsersReducer = (
-  state = initialState,
-  actions: ActionTypes,
-): initialStateType => {
-  switch (actions.type) {
-    case 'SET-USERS':
-      return { ...state, findUsers: [...actions.payload] };
 
-    case 'SET-CURRENT-PAGE':
-      return { ...state, currentPage: actions.payload };
-
-    case 'SET-TOTAL-COUNT':
-      return { ...state, totalCount: actions.payload };
-
-    case 'SET-PRELOADER':
-      return { ...state, isPreloader: actions.payload };
-     case 'users/SET_FILTER':
-       return {...state,  filter: actions.payload};
-    case 'FOLLOW-UNFOLLOW':
-      let copyState = {
-        ...state,
-        findUsers: state.findUsers.map(user => {
-          if (user.id === actions.payload) {
-            return { ...user, followed: !user.followed };
-          }
-          return user;
-        }),
-      };
-      return copyState;
-
-    default:
-      return state;
-  }
-};
-
-export const profileReducer = (
-  state = initialState,
-  actions: any,
-) => {
-  switch (actions.type) {
-    case 'ADD-POST':
-      const copyState = { ...state };
-      copyState.posts = [...state.posts];
-      copyState.userNewPost = actions.payload;
-      const newPost = {
-        name: state.posts.forEach.name,
-        id: shortid.generate(),
-        message: actions.payload,
-      };
-      copyState.posts.push(newPost);
-      return copyState;
-    case 'SET-USER-PROFILE':
-      return { ...state, profile: actions.payload };
-    case 'SET_STATUS':
-      return { ...state, status: actions.payload };
-    case 'SET_USER_PHOTO':
-      return { ...state, profile: { ...state.profile, userPhoto: actions.payload } };
-    default:
-      return state;
-  }
-};
+// export const profileReducer = (
+//   state = initialState,
+//   actions: any,
+// ) => {
+//   switch (actions.type) {
+//     case 'ADD-POST':
+//       const copyState = { ...state };
+//       copyState.posts = [...state.posts];
+//       copyState.userNewPost = actions.payload;
+//       const newPost = {
+//         name: state.posts.forEach.name,
+//         id: shortid.generate(),
+//         message: actions.payload,
+//       };
+//       copyState.posts.push(newPost);
+//       return copyState;
+//     case 'SET-USER-PROFILE':
+//       return { ...state, profile: actions.payload };
+//     case 'SET_STATUS':
+//       return { ...state, status: actions.payload };
+//     case 'SET_USER_PHOTO':
+//       return { ...state, profile: { ...state.profile, userPhoto: actions.payload } };
+//     default:
+//       return state;
+//   }
+// };
 
 export const userReducer = (state = initialState, actions: ActionTypes) => {
   return state;

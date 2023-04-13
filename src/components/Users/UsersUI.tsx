@@ -21,14 +21,11 @@ import {
   getUnfollowUsers,
   getUsers,
 } from '../../API/API-Users';
+import { RootState } from '../../redux/store';
 
 export const UsersUInterfece = () => {
-  const currentPage = useSelector(getCurrentPage);
-  const totalCount = useSelector(getTotalCount);
   const userCount = useSelector(getCountUsers);
-  const isPreloader = useSelector(getPreloader);
-  const findUsers = useSelector(getFindUser);
-  const filter = useSelector(getFilter);
+  const {findUsers} = useSelector((s: RootState) => s)
 
   const dispatch = useDispatch();
   const history = useHistory();
@@ -38,8 +35,8 @@ export const UsersUInterfece = () => {
       term: string;
       page: string;
     };
-    let actualFilter = filter;
-    let actualPage = currentPage;
+    let actualFilter = findUsers.filter;
+    let actualPage = findUsers.currentPage;
 
     if (!!parsed.page) actualPage = Number(parsed.page);
 
@@ -47,17 +44,18 @@ export const UsersUInterfece = () => {
       actualFilter = { ...actualFilter, term: parsed.term as string };
 
     dispatch(getUsers(userCount, actualPage, actualFilter.term as any));
-  }, [getUsers, userCount]);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [getUsers, userCount, dispatch]);
 
   useEffect(() => {
     history.push({
       pathname: '/users',
-      search: `?term=${filter}&page=${currentPage}`,
+      search: `?term=${findUsers.filter}&page=${findUsers.currentPage}`,
     });
-  }, [currentPage, filter]);
+  }, [findUsers]);
 
   const onCurrentPage = (pageNumber: number) => {
-    dispatch(getUsers(userCount, pageNumber, filter.term));
+    dispatch(getUsers(userCount, pageNumber, findUsers.filter.term));
   };
 
   const onFilterChanged = (filter: FilterType) => {
@@ -75,16 +73,16 @@ export const UsersUInterfece = () => {
   return (
     <div>
       <UsersSearchForm onFilterChanged={onFilterChanged} />
-      {isPreloader === true ? <SpinnerLoader /> : null}
+      {findUsers.isPreloader === true ? <SpinnerLoader /> : null}
       <Paginator
-        totalCount={totalCount}
+        totalCount={findUsers.totalCount}
         userCount={userCount}
         onCurrentPage={onCurrentPage}
-        currentPage={currentPage}
+        currentPage={findUsers.currentPage}
       />
 
       <ul>
-        {findUsers.map(({ id, followed, photos, name }) => {
+        {findUsers.findUsers.map(({ id, followed, photos, name }) => {
           return (
             <li key={id}>
               <div>
