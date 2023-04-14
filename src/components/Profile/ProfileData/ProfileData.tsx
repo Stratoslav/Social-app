@@ -11,17 +11,17 @@ type Props = {
   profile: any;
   isOwner: boolean;
   goToEditMode: any;
-  updateStatus: (statusProfile: string | null) => void;
-  status: string;
+  updateStatus: (statusProfile: any) => void;
+  status: any;
 };
 
-const ProfileData: FC<Props> = ({
+const ProfileData = ({
   profile,
   isOwner,
   goToEditMode,
   updateStatus,
   status,
-}) => {
+}: Props) => {
   return (
     <div className={style.Data}>
       <ul className={style.DataList}>

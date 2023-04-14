@@ -1,6 +1,8 @@
+import { useAppDispatch } from './../redux/hooks';
 import axios from 'axios';
 import { actions } from '../redux/create-actions';
 import { profileAction } from '../redux/slice/profileSlice';
+import { AppDispatch } from '../redux/store';
 
 export const instance = axios.create({
   withCredentials: true,
@@ -10,8 +12,8 @@ export const instance = axios.create({
   },
 });
 
-export const getAuthorizationUser = () => async dispatch => {
-  let response = await instance.get(`auth/me`);
+export const getAuthorizationUser = () => async (dispatch: AppDispatch) => {
+  let response: any = await instance.get(`auth/me`);
   if (response.data.resultCode === 0) {
     const { id, login, email } = response.data.data;
     console.log(response.data);
@@ -19,7 +21,7 @@ export const getAuthorizationUser = () => async dispatch => {
   }
 };
 
-export const initializedApp = () => dispatch => {
+export const initializedApp = () => (dispatch: AppDispatch) => {
   let promise = dispatch(getAuthorizationUser());
 
   Promise.all([promise]).then(() => {
@@ -29,16 +31,16 @@ export const initializedApp = () => dispatch => {
 
 export const login =
   (
-    email,
-    password,
-    rememberMe,
-    captcha,
-    setSubmitting,
-    setFieldError,
-    setStatus,
+    email:any,
+    password:any,
+    rememberMe:any,
+    captcha:any,
+    setSubmitting:any,
+    setFieldError:any,
+    setStatus:any,
   ) =>
-  async dispatch => {
-    const response = await instance.post(`auth/login`, {
+  async (dispatch: AppDispatch) => {
+    const response: any = await instance.post(`auth/login`, {
       email,
       password,
       rememberMe,
@@ -53,16 +55,16 @@ export const login =
     }
   };
 
-export const getCaptchaUrl = () => async dispatch => {
-  let response = await instance.get(`security/get-captcha-url`);
+export const getCaptchaUrl = () => async (dispatch: AppDispatch) => {
+  let response: any = await instance.get(`security/get-captcha-url`);
   const captchaUrl = response.data.url;
   dispatch(actions.GET_CAPTCHA_URL_SUCCESS(captchaUrl));
 };
 
-export const getUserPhoto = photoFile => async dispatch => {
+export const getUserPhoto = (photoFile: any) => async (dispatch: AppDispatch) => {
   const formData = new FormData();
   formData.append('image', photoFile);
-  let response = await instance.put('profile/photo', formData, {
+  let response: any = await instance.put('profile/photo', formData, {
     headers: { 'Content-Type': 'multipart/form-data' },
   });
   // <<<<<<<<<<<<<<MISTAKE>>>>>>>>>>>>>>>>>>>
@@ -72,25 +74,25 @@ export const getUserPhoto = photoFile => async dispatch => {
   }
 };
 
-export const logout = () => async dispatch => {
-  let response = await instance.delete(`auth/login`);
+export const logout = () => async (dispatch: AppDispatch) => {
+  let response:any = await instance.delete(`auth/login`);
   if (response.data.resultCode === 0) {
     dispatch(actions.SET_AUTH_USER_DATA(null, null, null, false));
   }
 };
 
-export const setUserProfile = userId => async dispatch => {
+export const setUserProfile = (userId:any) => async (dispatch: AppDispatch) => {
   let response = await instance.get(`profile/${userId}`);
   dispatch(profileAction.setUserProfile(response.data));
 };
 
-export const getStatus = userId => async dispatch => {
+export const getStatus = (userId:any) => async (dispatch: AppDispatch) => {
   let response = await instance.get(`profile/status/${userId}`);
   dispatch(profileAction.setStatus(response.data));
 };
 
-export const updateStatus = status => async dispatch => {
-  let response = await instance.put(`profile/status`, { status: status });
+export const updateStatus = (status:any) => async (dispatch: AppDispatch) => {
+  let response :any = await instance.put(`profile/status`, { status: status });
   if (response.data.resultCode === 0) {
     dispatch(profileAction.setStatus(status));
   }
@@ -98,18 +100,18 @@ export const updateStatus = status => async dispatch => {
 
 export const saveProfile =
   (
-    setFieldError,
-    setSubmitting,
-    setStatus,
-    fullName,
-    aboutMe,
-    lookingForAJobDescription,
-    lookingForAJob,
-    contacts,
+    setFieldError:any,
+    setSubmitting:any,
+    setStatus:any,
+    fullName:any,
+    aboutMe:any,
+    lookingForAJobDescription:any,
+    lookingForAJob:any,
+    contacts: any,
   ) =>
-  async (dispatch, getState) => {
+  async (dispatch: AppDispatch, getState:any) => {
     const userId = getState().auth.userId;
-    let response = await instance.put(`profile`, {
+    let response:any = await instance.put(`profile`, {
       fullName,
       aboutMe,
       lookingForAJobDescription,

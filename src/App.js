@@ -142,7 +142,7 @@ export const App = () => {
             </Layout>
           </Content>
           <Footer style={{ textAlign: 'center' }}>
-            Ant Design ©2018 Created by Ant UED
+            @2023 Social application
           </Footer>
         </Layout>
       </Suspense>
