@@ -1,7 +1,6 @@
 import { ChatMessageType } from './../page/Chat/ChatPage';
 import { InferActionTypes } from './store';
 import { actions } from './create-actions';
-import shortid from 'shortid';
 
 type ActionTypes = InferActionTypes<typeof actions>
 
@@ -96,54 +95,6 @@ const initialState = {
 export type initialStateType = typeof initialState;
 export type FilterType = typeof initialState.filter;
 
-export const messageReducer = (
-  state = initialState,
-  actions: ActionTypes,
-): initialStateType => {
-  switch (actions.type) {
-    case 'ADD-NEW-MESSAGE':
-      let copyState = { ...state };
-      copyState.messagers = [...state.messagers];
-      copyState.messageNewBody = actions.payload;
-      const newMessage = {
-        id: shortid.generate(),
-        message: actions.payload,
-      };
-      copyState.messagers.push(newMessage);
-      return copyState;
-
-    default:
-      return state;
-  }
-};
-
-
-// export const profileReducer = (
-//   state = initialState,
-//   actions: any,
-// ) => {
-//   switch (actions.type) {
-//     case 'ADD-POST':
-//       const copyState = { ...state };
-//       copyState.posts = [...state.posts];
-//       copyState.userNewPost = actions.payload;
-//       const newPost = {
-//         name: state.posts.forEach.name,
-//         id: shortid.generate(),
-//         message: actions.payload,
-//       };
-//       copyState.posts.push(newPost);
-//       return copyState;
-//     case 'SET-USER-PROFILE':
-//       return { ...state, profile: actions.payload };
-//     case 'SET_STATUS':
-//       return { ...state, status: actions.payload };
-//     case 'SET_USER_PHOTO':
-//       return { ...state, profile: { ...state.profile, userPhoto: actions.payload } };
-//     default:
-//       return state;
-//   }
-// };
 
 export const userReducer = (state = initialState, actions: ActionTypes) => {
   return state;
@@ -171,14 +122,3 @@ export const appReducer = (state = initialState, actions: ActionTypes) => {
 };
 
 
-export const chatReducer = (state = initialState, actions: ActionTypes) => {
-  switch (actions.type) {
-    case 'chat/MESSAGE_RESIEVED':
-      return { ...state, chat: [...state.chat, ...actions.payload].filter((m, index, array)=>index >= array.length - 100) };
-      case 'chat/STATUS_CHANGED':
-        return { ...state, statusChat: actions.payload };
-  
-    default:
-      return state;
-  }
-};

@@ -1,18 +1,15 @@
 import { useSelector } from 'react-redux';
-import { setNewPost } from '../../../redux/create-selector';
 import './MyPost.scss';
 import { RootState } from '../../../redux/store';
 import { useAppDispatch } from '../../../redux/hooks';
 import { profileAction } from '../../../redux/slice/profileSlice';
-import { MouseEvent, MouseEventHandler } from 'react';
+
 
 export default function AllPosts() {
 
   const newPost = useSelector((s: RootState) => s.profile.posts)
   const dispatch = useAppDispatch()
-//   const removePost  = ( id: number) => {
-//     dispatch(profileAction.deletePost(id))
-//  }
+  
   return (
     <div className={'Post_All'}>
       <ul className={'Post_List'}>

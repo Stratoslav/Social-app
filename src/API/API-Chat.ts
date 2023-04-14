@@ -1,8 +1,9 @@
 import { Action, Dispatch } from 'redux';
 import { ThunkAction } from 'redux-thunk';
-import { actions } from '../redux/create-actions';
+
 import { StatusType } from '../redux/create-reducer';
 import { AppStateReducer } from '../redux/store';
+import { chatAction } from '../redux/slice/chatSlice';
 export type ChatMessageType = {
   message: string;
   photo: string;
@@ -88,7 +89,7 @@ let _newChatHendler: ((message: ChatMessageType[]) => void) | null = null;
 const newChatHendler = (dispatch: Dispatch) => {
   if (_newChatHendler === null) {
     _newChatHendler = message => {
-      dispatch(actions.MESSAGE_RESIEVED(message));
+      dispatch(chatAction.messageResieved(message));
     };
   }
 
@@ -98,7 +99,7 @@ let _statusChangedHendler: ((statusChat: StatusType) => void) | null = null;
 const statusChangedHendler = (dispatch: Dispatch) => {
   if (_statusChangedHendler === null) {
     _statusChangedHendler = statusChat => {
-      dispatch(actions.STATUS_CHANGED(statusChat));
+      dispatch(chatAction.statusChanged(statusChat));
     };
   }
 

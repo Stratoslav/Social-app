@@ -48,7 +48,7 @@ export const App = () => {
   if (!initialized) {
     return <SpinnerLoader />;
   }
-
+  //tyjtjtyj
   return (
     <BrowserRouter>
       <Suspense fallback={'Loading...'}>

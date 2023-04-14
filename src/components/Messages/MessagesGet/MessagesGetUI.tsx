@@ -1,18 +1,19 @@
 import { Formik, Field, Form } from 'formik';
 import { useDispatch, useSelector } from 'react-redux';
-import { getNewMessage } from '../../../redux/create-selector';
-import { actions } from '../../../redux/create-actions';
+
+import { RootState } from '../../../redux/store';
+import { messageAction } from '../../../redux/slice/messageSlice';
 
 const MessagesGetUI = () => {
-  const newMessage = useSelector(getNewMessage);
-  const dispatch = useDispatch();
 
-  const dispatchD = (sendNewMessage: string) => {
-    dispatch(actions.ADD_NEW_MESSAGE(sendNewMessage));
+  const dispatch = useDispatch();
+const {messagers} = useSelector((s: RootState) => s.newMessage)
+  const getNewMessage = (sendNewMessage: string) => {
+    dispatch(messageAction.addNewMessage(sendNewMessage));
   };
   return (
     <div>
-      {newMessage.map(({ message, id }) => {
+      {messagers.map(({ message, id }) => {
         return (
           <div key={id}>
             <p>{message}</p>
@@ -30,7 +31,7 @@ const MessagesGetUI = () => {
             alert('Sorry, but need to fill in the gaps');
             return;
           } else {
-            dispatchD(values.sendNewMessage);
+            getNewMessage(values.sendNewMessage);
             values.sendNewMessage = '';
           }
         }}

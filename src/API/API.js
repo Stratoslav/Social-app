@@ -10,14 +10,6 @@ export const instance = axios.create({
   },
 });
 
-// export type ThunkType = ThunkAction<void, AppStateReducer, unknown, Action<any>>;
-
-// type getAuthorizationUserType = {
-//   resultCode: number
-//   messages: Array<string>
-//   data: {id: number, login: string, email: string}
-// }
-
 export const getAuthorizationUser = () => async dispatch => {
   let response = await instance.get(`auth/me`);
   if (response.data.resultCode === 0) {
@@ -34,26 +26,6 @@ export const initializedApp = () => dispatch => {
     dispatch(actions.INITIALIZATION_SUCCESS());
   });
 };
-
-// type loginType = {
-//   data: object
-//   email: string,
-//   password: string
-//   rememberMe: boolean
-//   captcha?: any
-//   resultCode: number
-//   messages: Array<string>
-//   data: {useId: number}
-// }
-
-// type LoginType = {
-//   resultCode: number
-//   messages: Array<string>
-//   data: object
-//   userId: number
-// }
-
-// type loginThunkType = ThunkAction<Promise<void>, AppStateReducer, unknown, Action<any>>
 
 export const login =
   (
@@ -81,21 +53,11 @@ export const login =
     }
   };
 
-// type getCaptchaUrlType = {
-//   url: string
-// }
-
 export const getCaptchaUrl = () => async dispatch => {
   let response = await instance.get(`security/get-captcha-url`);
   const captchaUrl = response.data.url;
   dispatch(actions.GET_CAPTCHA_URL_SUCCESS(captchaUrl));
 };
-
-// type getUserPhotoType = {
-//   data: { small: string | null, large: string | null},
-//   resultCode: number,
-//   messages: Array<string>,
-// }
 
 export const getUserPhoto = photoFile => async dispatch => {
   const formData = new FormData();
@@ -109,12 +71,6 @@ export const getUserPhoto = photoFile => async dispatch => {
     dispatch(profileAction.setUserPhoto(ImageUrl));
   }
 };
-
-// type LogOutType = {
-//   resultCode: number
-//   messages: Array<string>
-//   data: object
-// }
 
 export const logout = () => async dispatch => {
   let response = await instance.delete(`auth/login`);
@@ -133,25 +89,12 @@ export const getStatus = userId => async dispatch => {
   dispatch(profileAction.setStatus(response.data));
 };
 
-// type updateStatusType = {
-//   resultCode: number,
-//   messages: Array<string>,
-//   data: {status: string | null}
-// }
-
 export const updateStatus = status => async dispatch => {
   let response = await instance.put(`profile/status`, { status: status });
   if (response.data.resultCode === 0) {
     dispatch(profileAction.setStatus(status));
   }
 };
-
-// type saveProfileType = {
-//   resultCode: number
-//   messages: Array<string>
-//   data: {}
-
-// }
 
 export const saveProfile =
   (

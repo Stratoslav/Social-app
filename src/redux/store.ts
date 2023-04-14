@@ -1,9 +1,12 @@
 import { configureStore, combineReducers } from '@reduxjs/toolkit';
 import { persistStore, persistReducer } from 'redux-persist'
 import storage from 'redux-persist/lib/storage'
-import { messageReducer, userReducer , authReducer, appReducer, chatReducer } from './create-reducer';
+import {  userReducer , authReducer, appReducer } from './create-reducer';
 import { findUserReducer } from './slice/findUserSlice';
 import { profileReducer } from './slice/profileSlice';
+import { messageReducer } from './slice/messageSlice';
+import { chatReducer } from './slice/chatSlice';
+
 const persistConfig = {
   key: 'root',
   storage,
@@ -40,3 +43,4 @@ export type RootState = ReturnType<typeof store.getState>
 export type AppDispatch = typeof store.dispatch
 const persistor = persistStore(store)
 export  {store, persistor};
+ 
