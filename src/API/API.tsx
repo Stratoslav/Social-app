@@ -1,8 +1,9 @@
-import { useAppDispatch } from './../redux/hooks';
+import { useAppDispatch } from '../redux/hooks';
 import axios from 'axios';
 import { actions } from '../redux/create-actions';
 import { profileAction } from '../redux/slice/profileSlice';
 import { AppDispatch } from '../redux/store';
+import { Redirect, Route } from 'react-router-dom';
 
 export const instance = axios.create({
   withCredentials: true,
@@ -31,30 +32,37 @@ export const initializedApp = () => (dispatch: AppDispatch) => {
 
 export const login =
   (
-    email:any,
-    password:any,
-    rememberMe:any,
-    captcha:any,
+    email:string,
+    password:string,
+    rememberMe:boolean, 
+    captcha:() => void,
     setSubmitting:any,
     setFieldError:any,
     setStatus:any,
   ) =>
   async (dispatch: AppDispatch) => {
-    const response: any = await instance.post(`auth/login`, {
+    const response: {data: { resultCode: number, messages: any[]}, config: any, headers: any, request: any, status: number, statusText: string} = await instance.post(`auth/login`, {
       email,
       password,
       rememberMe,
       captcha,
     });
-
+  
     if (response.data.resultCode === 0) {
       dispatch(getAuthorizationUser());
+    RedirectToProfile()   
     } else if (response.data.resultCode === 10) {
       dispatch(getCaptchaUrl());
       setStatus(response.data.messages);
     }
   };
-
+const RedirectToProfile = () => {
+  return (
+    <Route exact path="/login">
+      {<Redirect to="/profile" />}
+    </Route>
+  )
+}
 export const getCaptchaUrl = () => async (dispatch: AppDispatch) => {
   let response: any = await instance.get(`security/get-captcha-url`);
   const captchaUrl = response.data.url;
