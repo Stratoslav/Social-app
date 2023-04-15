@@ -3,7 +3,6 @@ import { Action } from 'redux';
 import { ThunkAction } from 'redux-thunk';
 import  {actions} from '../redux/create-actions';
 import { AppStateReducer } from '../redux/store';
-import { authAction } from "../redux/slice/authSlice";
 type ThunkType = ThunkAction<void, AppStateReducer, unknown, Action<any>>;
 
 type getAuthorizationUserType = {
@@ -17,7 +16,7 @@ export const getAuthorizationUser = (): ThunkType  => async dispatch => {
     if (response.data.resultCode === 0) {
       const { id, login, email } = response.data.data;
       console.log(response.data);
-      dispatch(authAction.setAuthUserData({id, login, email, isAuth: true}));
+      dispatch(actions.SET_AUTH_USER_DATA(id, login, email, true));
     }
   };
   
@@ -29,3 +28,25 @@ export const getAuthorizationUser = (): ThunkType  => async dispatch => {
     });
   };
   
+//   export const login =
+//   (
+//     email,
+//     password,
+//     rememberMe,
+//     captcha,
+//     setSubmitting,
+//     setFieldError,
+//     setStatus,
+//   ): ThunkType =>
+//    async dispatch => {
+//     const response = await instance.post(`auth/login`
+//      , { email,password,rememberMe,captcha,}
+//     );
+
+//     if (response.data.resultCode === 0) {
+//       dispatch(getAuthorizationUser());
+//     } else if (response.data.resultCode === 10) {
+//       dispatch(getCaptchaUrl());
+//       setStatus(response.data.messages);
+//     }
+//   };

@@ -104,17 +104,17 @@ export const userReducer = (state = initialState, actions: ActionTypes) => {
   return state;
 };
 
-// export const authReducer = (state = initialState, actions: ActionTypes) => {
-//   switch (actions.type) {
-//     case 'SET_AUTH_USER_DATA':
+export const authReducer = (state = initialState, actions: ActionTypes) => {
+  switch (actions.type) {
+    case 'SET_AUTH_USER_DATA':
       
-//       return { ...state, ...actions.payload, userId: actions.payload.id };
-//     case 'GET_CAPTCHA_URL_SUCCESS':
-//       return { ...state, captchaUrl: actions.payload };
-//     default:
-//       return state;
-//   }
-// };
+      return { ...state, ...actions.payload, userId: actions.payload.id };
+    case 'GET_CAPTCHA_URL_SUCCESS':
+      return { ...state, captchaUrl: actions.payload };
+    default:
+      return state;
+  }
+};
 
 export const appReducer = (state = initialState, actions: ActionTypes) => {
   switch (actions.type) {

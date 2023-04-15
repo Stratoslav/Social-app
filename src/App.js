@@ -24,7 +24,7 @@ import { initializedApp } from './API/API';
 import SpinnerLoader from './common/Spinner/Spinner';
 
 import { Button } from 'antd/lib/radio';
-
+import Login from './components/Login/Login';
 import { setInitialized } from './redux/create-selector';
 
 const Profile = lazy(() => import('./components/Profile/Profile'));
@@ -32,7 +32,7 @@ const Chat = lazy(() => import('./page/Chat/ChatPage'));
 const HeaderTop = lazy(() => import('./components/Header/Header'));
 const Users = lazy(() => import('./components/Users/Users'));
 
-const Login = lazy(() => import('./components/Login/Login.jsx'));
+// const Login = lazy(() => import('./components/Login/Login.jsx'));
 // const Friends = lazy(() => import('./components/Friends/Friends'));
 const Music = lazy(() => import('./components/Music/AllMusic'));
 const { SubMenu } = Menu;

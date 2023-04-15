@@ -17,7 +17,7 @@ export const getAuthorizationUser = () => async (dispatch: AppDispatch) => {
   let response: any = await instance.get(`auth/me`);
   if (response.data.resultCode === 0) {
     const { id, login, email } = response.data.data;
- 
+    console.log(response.data);
     dispatch(actions.SET_AUTH_USER_DATA(id, login, email, true));
   }
 };
@@ -78,9 +78,7 @@ export const getUserPhoto = (photoFile: any) => async (dispatch: AppDispatch) =>
 
 export const logout = () => async (dispatch: AppDispatch) => {
   let response:any = await instance.delete(`auth/login`);
-   console.log(response)
   if (response.data.resultCode === 0) {
-  
     dispatch(actions.SET_AUTH_USER_DATA(null, null, null, false));
   }
 };
