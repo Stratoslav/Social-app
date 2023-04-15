@@ -42,9 +42,9 @@ class ProfileInfo extends Component<PropsType, StateType> {
       <div>
         Status:{' '}
         {editStatus ? (
-          <span style={{ cursor: 'pointer' }}>
+          <span style={{ cursor: 'pointer' , marginLeft:5 }}>
             {status}
-            <button onClick={this.changeStatus}>Изменить</button>
+            <button style={{ marginLeft:5 }} onClick={this.changeStatus}>Изменить</button>
           </span>
         ) : (
           <label htmlFor="status">

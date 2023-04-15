@@ -21,15 +21,22 @@ const LoginUI = ({ login, captchaUrl, isAuth }) => {
     email: 'stas.kurbanov03@gmail.com',
     password: '',
     rememberMe: false,
-
   };
-  const onSubmit = (values, {setFieldError, setSubmitting, setStatus}) => {
-    login( values.email, values.password, values.rememberMe, values.captchaUrl, setFieldError, setSubmitting, setStatus);
-   setSubmitting(false);
+  console.log(isAuth);
+  const onSubmit = (values, { setFieldError, setSubmitting, setStatus }) => {
+    login(
+      values.email,
+      values.password,
+      values.rememberMe,
+      values.captchaUrl,
+      setFieldError,
+      setSubmitting,
+      setStatus,
+    );
+    setSubmitting(false);
     if (isAuth === true) {
       return <Redirect to="/users" />;
- }
-
+    }
   };
 
   const [formValues, setFormValues] = useState(null);
@@ -47,7 +54,7 @@ const LoginUI = ({ login, captchaUrl, isAuth }) => {
       onSubmit={onSubmit}
       enableReinitialize
     >
-      {({ values, errors , status}) => (
+      {({ values, errors, status }) => (
         <Form>
           <h1>Login</h1>
           <div>
@@ -83,7 +90,6 @@ const LoginUI = ({ login, captchaUrl, isAuth }) => {
                 </label>
               </div>
             )}
-            
           </div>
 
           <div>
@@ -93,7 +99,7 @@ const LoginUI = ({ login, captchaUrl, isAuth }) => {
 
             <ErrorMessage name="rememberMe" component={LoginError} />
           </div>
-          <div> {`${status}` ? status : null } </div>
+          <div> {`${status}` ? status : null} </div>
           {!values.rememberMe ? (
             <button disabled type="submit">
               <div>Log in</div>
@@ -103,7 +109,7 @@ const LoginUI = ({ login, captchaUrl, isAuth }) => {
               <div>Log in</div>
             </button>
           )}
-        
+
           <button type="button" onClick={() => setFormValues(savedValues)}>
             Load save data
           </button>

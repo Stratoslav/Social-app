@@ -1,20 +1,22 @@
 import style from '../Header/Header.module.css';
 import { NavLink } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { getIsAuth, getLogin } from '../../redux/create-selector';
+import { getIsAuth, getLogin, } from '../../redux/create-selector';
 import { logout } from '../../API/API';
 import { Layout, Menu } from 'antd';
 import { Button } from 'antd/lib/radio';
+import { useAppDispatch } from '../../redux/hooks';
 const { Header } = Layout;
 
 const HeaderUI = () => {
   const login = useSelector(getLogin);
-  const isAuth = useSelector(getIsAuth);
+  let isAuth = useSelector(getIsAuth);
 
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
 
   const logOut = () => {
     dispatch(logout());
+    isAuth = false
   };
 
   return (
@@ -23,13 +25,12 @@ const HeaderUI = () => {
         <Header style={{ height: 'auto' }} className="header">
           <div className="logo" />
           <Menu theme="dark" mode="horizontal" defaultSelectedKeys={['1']}>
+            <div className={style.headerWrapper}>
+              
+          
             {isAuth ? (
               <div
-                style={{
-                  display: 'flex',
-                  justifyContent: 'space-between',
-                  alignItems: 'center',
-                }}
+            className={style.headerInfo}
               >
                 <span>
                   <NavLink to="/profile" className={style.headerLink}>
@@ -37,17 +38,18 @@ const HeaderUI = () => {
                   </NavLink>
                 </span>
 
-                <Button onClick={() => logOut()}>
-                  <NavLink className={style.headerLink} to="/login">
-                    LogOut
-                  </NavLink>
-                </Button>
+                <span className={style.logOut}  onClick={() => logOut()}>
+                  <a target="_blank" style={{color: "white"}} className={style.headerLink} href="https://social-network.samuraijs.com/Auth/Auth/LogOut" rel="noreferrer">
+                   <span>log out</span>
+                  </a>
+                </span>
               </div>
             ) : (
-              <Button>
+              <Button className={style.logIn}>
                 <NavLink to="/login">LogIn</NavLink>
               </Button>
-            )}
+              )}
+               </div>
           </Menu>
         </Header>
       </div>

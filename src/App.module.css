@@ -1,5 +1,9 @@
-
-
+a{
+  color: #fff;
+}
+li{
+  list-style: none;
+}
 .Grid { 
   max-width: 1200px;
   width: 100%;

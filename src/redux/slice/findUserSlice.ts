@@ -4,8 +4,10 @@ import { PayloadAction, createSlice } from "@reduxjs/toolkit";
 
 interface ProfileI {
     findUsers: any[],
+    getFriends: any[]
     currentPage: number,
     totalCount: number,
+    friendsTotalCount: number
     isPreloader: boolean,
     filter: { term: string },
     userCount: number
@@ -13,8 +15,10 @@ interface ProfileI {
 
 const initialState: ProfileI = {
     findUsers: [],
+    getFriends: [],
     currentPage: 1,
     totalCount: 0,
+    friendsTotalCount: 0,
     isPreloader: false,
     filter: {
         term: ''
@@ -29,11 +33,19 @@ export const findUserSlice = createSlice({
         setUsers: (state, action: PayloadAction<any>) => {
             state.findUsers = [...action.payload]
         },
+        getFriends: (state, action: PayloadAction<any>) => {
+            console.log(action.payload)
+            console.log(state.getFriends)
+            state.getFriends = [...action.payload]
+        },
         setCurrentPage: (state, action: PayloadAction<number>) => {
  state.currentPage = action.payload
         },
         setTotalCount: (state, action: PayloadAction<number>) => {
 state.totalCount = action.payload
+        },
+         setFriendsTotalCount: (state, action: PayloadAction<number>) => {
+state.friendsTotalCount = action.payload
         },
         setPreloader: (state, action: PayloadAction<boolean>) => {
           state.isPreloader = action.payload

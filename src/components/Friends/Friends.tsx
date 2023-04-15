@@ -1,16 +1,137 @@
-import { useSelector } from 'react-redux';
-import { getFindUser } from '../../redux/create-selector';
+import SpinnerLoader from '../../common/Spinner/Spinner';
+import { NavLink } from 'react-router-dom';
+import Button from 'react-bootstrap/Button';
+import Paginator from '../../common/Paginator/Paginator';
+import { useEffect } from 'react';
+import { FilterType } from '../../redux/create-reducer';
+import { UsersSearchForm } from '../Users/UsersSearchForm';
+import { useDispatch, useSelector } from 'react-redux';
+import { useHistory } from 'react-router';
+import queryString from 'querystring';
+import {
+  getCountUsers,
+} from '../../redux/create-selector';
+import {
+  getFollowUsers,
+  getUnfollowUsers,
+  // getUserFriend,
+  getUsers,
+} from '../../API/API-Users';
+import { RootState } from '../../redux/store';
+import s from '../Users/Users.module.css'
+export const Friends = () => {
+  const userCount = useSelector(getCountUsers);
+  console.log(userCount)
+  // const friendsCount = useSelector((s: RootState) => s.findUsers.friendsTotalCount)
+  const {findUsers} = useSelector((s: RootState) => s)
 
-export default function Friends() {
-  const findUsers = useSelector(getFindUser);
+  const dispatch = useDispatch();
+  const history = useHistory();
+
+  useEffect(() => {
+    const parsed = queryString.parse(history.location.search) as {
+      term: string;
+      page: string;
+  
+    };
+    let actualFilter = findUsers.filter;
+    let actualPage = findUsers.currentPage;
+
+    if (!!parsed.page) actualPage = Number(parsed.page);
+
+    if (!!parsed.term)
+      actualFilter = { ...actualFilter, term: parsed.term as string };
+
+    dispatch(getUsers(userCount, actualPage, actualFilter.term as any));
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [getUsers, userCount, dispatch]);
+
+  useEffect(() => {
+    history.push({
+      pathname: '/friends',
+      search: `?term=${findUsers.filter}&page=${findUsers.currentPage}&friends=&true`,
+    });
+  }, [findUsers]);
+
+  const onCurrentPage = (pageNumber: number) => {
+    dispatch(getUsers(userCount, pageNumber, findUsers.filter.term));
+  };
+
+  const onFilterChanged = (filter: FilterType) => {
+    dispatch(getUsers(userCount, 1, filter.term));
+  };
+
+  const follow = (userId: number) => {
+    dispatch(getFollowUsers(userId));
+
+  };
+
+  const unfollow = (userId: number) => {
+    dispatch(getUnfollowUsers(userId));
+  };
+
   return (
-    <section>
-      <div>
-        {findUsers.map(({ name, id, followed }) => {
-          return <div key={id}>{followed ? <p>{name}</p> : null}</div>;
+    <div>
+      <UsersSearchForm onFilterChanged={onFilterChanged} />
+      {findUsers.isPreloader === true ? <SpinnerLoader /> : null}
+      <Paginator
+        totalCount={findUsers.friendsTotalCount}
+        userCount={userCount}
+        onCurrentPage={onCurrentPage}
+        currentPage={findUsers.currentPage}
+      />
+
+      <ul>
+        {findUsers.getFriends.map(({ id, followed, photos, name }) => {
+          return (
+            <li key={id}>
+               <div className={s.userInfoWrapper}>
+                <NavLink to={`/profile/${id}`}>
+                  <span>
+                    {photos.small === null ? (
+                      <img
+                        width="100px"
+                        height="100px"
+                        src="https://media.pn.am/media/issue/197/297/photo/197297.jpg"
+                        alt=""
+                      />
+                    ) : (
+                      <img src={photos.small} alt="" />
+                    )}
+                  </span>
+              
+                </NavLink>
+                <div style={{marginLeft: "5px"}}>
+                    <p>{name}</p>
+                   {followed === false ? (
+                  <Button
+                    onClick={() => {
+                      follow(id);
+                    }}
+                    variant="dark"
+                  >
+                    {' '}
+                    FOLLOW
+                  </Button>
+                ) : (
+                  <Button
+                    variant="light"
+                    onClick={() => {
+                      unfollow(id);
+                    }}
+                  >
+                    UNFOLLOW
+                  </Button>
+                  )}
+                 
+                </div>
+               
+              </div>
+            </li>
+          );
         })}
-      </div>
-    </section>
+      </ul>
+    </div>
   );
-}
-//ergeheh
+};
+

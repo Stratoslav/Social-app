@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 
 import { RootState } from '../../../redux/store';
 import { messageAction } from '../../../redux/slice/messageSlice';
-
+import s from '../Messages.module.css'
 const MessagesGetUI = () => {
 
   const dispatch = useDispatch();
@@ -40,11 +40,12 @@ const {messagers} = useSelector((s: RootState) => s.newMessage)
           <Form>
             <label htmlFor="sendNewMessage"></label>
             <Field
+              className={s.messageInput}
               id="sendNewMessage"
               name="sendNewMessage"
               value={values.sendNewMessage}
             />
-            <button type="submit">Add message</button>
+            <button className={s.messageFormButton} type="submit">Add message</button>
           </Form>
         )}
       </Formik>

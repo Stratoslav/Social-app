@@ -20,9 +20,38 @@
   }
   
   .pagination .active {
-    background-color: #4CAF50;
+    background-color:  #001529;;
     color: white;
-    border: 1px solid #4CAF50;
+    border: 1px solid #001529;
   }
   
   .pagination:hover:not(.active) {background-color: #ddd;}
+.userForm{
+  align-items: center;
+  margin-bottom: 20px;
+
+}
+  .userFieldForm {
+   margin:0 5px;
+    padding: 2px 5px;
+  }
+   
+
+  
+    .userButtonForm {
+      transition: all 0.2s;
+      background-color: inherit;
+      padding: 2px 5px;
+      font-size: 18px;
+    }
+  
+    .userButtonForm:hover {
+      opacity: 1;
+      background: #001529;
+      color: rgb(234, 253, 147);
+    }
+        .userInfoWrapper {
+          display: flex;
+          align-items: flex-end;
+          margin-bottom: 20px;
+        }

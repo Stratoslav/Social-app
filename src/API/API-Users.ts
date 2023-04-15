@@ -27,11 +27,18 @@ export const getUsers =
     let response = await instance.get<getUsersType>(
       `users?count=${userCount}&page=${currentPage}&term=${term}`,
     );
-
+    let res = await instance.get<getUsersType>(
+        `users?count=${userCount}&page=${currentPage}&term=${term}&friend=${true}`,
+    )
+    console.log(res.data.totalCount)
+    
     dispatch(findUserAction.setPreloader(false));
+    dispatch(findUserAction.getFriends(res.data.items))
     dispatch(findUserAction.setCurrentPage(currentPage));
     dispatch(findUserAction.setFilter(term));
     dispatch(findUserAction.setTotalCount(response.data.totalCount));
+      dispatch(findUserAction.setFriendsTotalCount(res.data.totalCount));
+
     dispatch(findUserAction.setUsers(response.data.items));
   };
 
@@ -44,6 +51,8 @@ export const getFollowUsers =
     if (response.data.resultCode === 0) {
       dispatch(findUserAction.setPreloader(true));
       dispatch(findUserAction.followUnfollow(id));
+      // dispatch(findUserAction.setUsers)
+      // dispatch(findUserAction.addFriendUser(id))
       setTimeout(() => {
         dispatch(findUserAction.setPreloader(false));
       }, 1000);
@@ -54,9 +63,26 @@ export const getUnfollowUsers =
   (id: number): ThunkType =>
   async dispatch => {
     let response = await instance.delete<DefaultType>(
+
       `follow/${id}`,
     );
     if (response.data.resultCode === 0) {
       dispatch(findUserAction.followUnfollow(id));
+         
     }
   };
+
+// export const getUserFriend =
+//   (userId: number): ThunkType =>
+//   async dispatch => {
+//     let response = await instance.get<DefaultType>(
+
+//       `follow/${userId}`,
+//     );
+//     if (userId) {
+//       console.log(response)
+//       dispatch(findUserAction.getFriends(userId));
+         
+//     }
+//     };
+  

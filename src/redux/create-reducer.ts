@@ -14,8 +14,12 @@ type MessagersType = {
   id: number | string;
 };
  export type UsersType = {
-  names: string | null;
-  id: number;
+  name: string | null;
+   id: number;
+   followed: boolean,
+   status: string | null,
+   uniqueUrlName: string | null,
+   photos: { small: string | null, large: string | null}
 };
 export type PhotosType = {
   small: string;
@@ -62,11 +66,11 @@ const initialState = {
   ] as Array<MessagersType>,
   messageNewBody: '' as string | null,
   users: [
-    { names: 'Dima', id: 1 },
-    { names: 'Vika', id: 2 },
-    { names: 'Slava', id: 3 },
-    { names: 'Gosha', id: 4 },
-    { names: 'Antoni', id: 5 },
+    { name: 'Dima', id: 1 },
+    { name: 'Vika', id: 2 },
+    { name: 'Slava', id: 3 },
+    { name: 'Gosha', id: 4 },
+    { name: 'Antoni', id: 5 },
   ] as Array<UsersType>,
 
   findUsers: [] as Array<FindUsersType>,
@@ -103,6 +107,7 @@ export const userReducer = (state = initialState, actions: ActionTypes) => {
 export const authReducer = (state = initialState, actions: ActionTypes) => {
   switch (actions.type) {
     case 'SET_AUTH_USER_DATA':
+      
       return { ...state, ...actions.payload, userId: actions.payload.id };
     case 'GET_CAPTCHA_URL_SUCCESS':
       return { ...state, captchaUrl: actions.payload };

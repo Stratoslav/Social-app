@@ -16,7 +16,7 @@ import {
   NavLink,
 } from 'react-router-dom';
 import { Messages } from './components/Messages/Messages';
-
+import { Friends } from './components/Friends/Friends';
 import { useDispatch, useSelector } from 'react-redux';
 
 import { initializedApp } from './API/API';
@@ -33,7 +33,7 @@ const HeaderTop = lazy(() => import('./components/Header/Header'));
 const Users = lazy(() => import('./components/Users/Users'));
 
 const Login = lazy(() => import('./components/Login/Login.jsx'));
-const Friends = lazy(() => import('./components/Friends/Friends'));
+// const Friends = lazy(() => import('./components/Friends/Friends'));
 const Music = lazy(() => import('./components/Music/AllMusic'));
 const { SubMenu } = Menu;
 const { Content, Footer, Sider } = Layout;

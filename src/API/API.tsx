@@ -3,7 +3,7 @@ import axios from 'axios';
 import { actions } from '../redux/create-actions';
 import { profileAction } from '../redux/slice/profileSlice';
 import { AppDispatch } from '../redux/store';
-import { Redirect, Route } from 'react-router-dom';
+import { Redirect, Route, useHistory } from 'react-router-dom';
 
 export const instance = axios.create({
   withCredentials: true,
@@ -17,7 +17,7 @@ export const getAuthorizationUser = () => async (dispatch: AppDispatch) => {
   let response: any = await instance.get(`auth/me`);
   if (response.data.resultCode === 0) {
     const { id, login, email } = response.data.data;
-    console.log(response.data);
+ 
     dispatch(actions.SET_AUTH_USER_DATA(id, login, email, true));
   }
 };
@@ -50,19 +50,13 @@ export const login =
   
     if (response.data.resultCode === 0) {
       dispatch(getAuthorizationUser());
-    RedirectToProfile()   
+    
     } else if (response.data.resultCode === 10) {
       dispatch(getCaptchaUrl());
       setStatus(response.data.messages);
     }
   };
-const RedirectToProfile = () => {
-  return (
-    <Route exact path="/login">
-      {<Redirect to="/profile" />}
-    </Route>
-  )
-}
+
 export const getCaptchaUrl = () => async (dispatch: AppDispatch) => {
   let response: any = await instance.get(`security/get-captcha-url`);
   const captchaUrl = response.data.url;
@@ -84,7 +78,9 @@ export const getUserPhoto = (photoFile: any) => async (dispatch: AppDispatch) =>
 
 export const logout = () => async (dispatch: AppDispatch) => {
   let response:any = await instance.delete(`auth/login`);
+   console.log(response)
   if (response.data.resultCode === 0) {
+  
     dispatch(actions.SET_AUTH_USER_DATA(null, null, null, false));
   }
 };

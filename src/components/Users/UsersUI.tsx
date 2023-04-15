@@ -19,10 +19,11 @@ import {
 import {
   getFollowUsers,
   getUnfollowUsers,
+  // getUserFriend,
   getUsers,
 } from '../../API/API-Users';
 import { RootState } from '../../redux/store';
-
+import s from './Users.module.css'
 export const UsersUInterfece = () => {
   const userCount = useSelector(getCountUsers);
   const {findUsers} = useSelector((s: RootState) => s)
@@ -64,6 +65,7 @@ export const UsersUInterfece = () => {
 
   const follow = (userId: number) => {
     dispatch(getFollowUsers(userId));
+    // dispatch(getUserFriend(userId))
   };
 
   const unfollow = (userId: number) => {
@@ -84,14 +86,14 @@ export const UsersUInterfece = () => {
       <ul>
         {findUsers.findUsers.map(({ id, followed, photos, name }) => {
           return (
-            <li key={id}>
-              <div>
+            <li   key={id}>
+              <div className={s.userInfoWrapper}>
                 <NavLink to={`/profile/${id}`}>
                   <span>
                     {photos.small === null ? (
                       <img
-                        width="30px"
-                        height="30px"
+                        width="100px"
+                        height="100px"
                         src="https://media.pn.am/media/issue/197/297/photo/197297.jpg"
                         alt=""
                       />
@@ -99,35 +101,35 @@ export const UsersUInterfece = () => {
                       <img src={photos.small} alt="" />
                     )}
                   </span>
+              
                 </NavLink>
-                {followed === false ? (
+                <div style={{marginLeft: "5px"}}>
+                    <p>{name}</p>
+                   {followed === false ? (
                   <Button
                     onClick={() => {
                       follow(id);
                     }}
-                    variant="success"
+                    variant="dark"
                   >
                     {' '}
                     FOLLOW
                   </Button>
                 ) : (
                   <Button
-                    variant="primary"
+                    variant="light"
                     onClick={() => {
                       unfollow(id);
                     }}
                   >
                     UNFOLLOW
                   </Button>
-                )}
-              </div>
-              <div>
-                <p>{name}</p>
-                <div>
-                  <span>{'location.city'}</span>
-                  <span>{'location.country'}</span>
+                  )}
+                 
                 </div>
+               
               </div>
+        
             </li>
           );
         })}

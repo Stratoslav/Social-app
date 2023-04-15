@@ -22,6 +22,7 @@ const ProfileData = ({
   updateStatus,
   status,
 }: Props) => {
+  console.log(Object(profile.contacts))
   return (
     <div className={style.Data}>
       <ul className={style.DataList}>
@@ -50,8 +51,10 @@ const ProfileData = ({
         <ProfileStatus status={status} updateStatus={updateStatus} />
         <div>
           <b>Contacts:</b>
-          {Object.keys(profile.contacts).map(key => {
-            return (
+        
+        {Object.keys(profile.contacts).map(key => {
+          return (
+              
               <Contacts
                 key={key}
                 contactTitle={key}
@@ -75,13 +78,14 @@ const ProfileData = ({
 
 type PropsType = {
   contactTitle: string;
-  contactValue: string | undefined;
+  contactValue: string ;
 };
 
 const Contacts: FC<PropsType> = ({ contactTitle, contactValue }) => {
   return (
     <div>
-      <b>{contactTitle}</b> <a href={contactValue}>{contactValue}</a>
+      {contactValue?.length > 0 && contactValue !== null ? ( <><b>{contactTitle}</b> <a href={contactValue}>{contactValue}</a></> ) : null }
+     
     </div>
   );
 };

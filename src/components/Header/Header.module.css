@@ -6,12 +6,21 @@
     align-items: center;
     padding: 0px 10px;
 }
+.headerWrapper {
+    width: 100%;
+}
+.headerInfo{
+width: 100%;
 
+    justify-content: space-between;
+    align-items: center;
+    display: flex;
+}
 .HeaderName{
     font-size: 20px;
     color: #fff;
     font-family: inherit;
-    border: 1px solid #fff;
+    /* border: 1px solid #fff; */
     padding: 5px;
     border-radius: 5px;
     margin-bottom: 5px;
@@ -20,7 +29,7 @@
 .headerLogOutButton{
     background: inherit;
     color: #fff;
-    border: 1px solid #fff;
+    /* border: 1px solid #fff; */
     padding: 3px 10px;
     border-radius: 5px;
     font-size: 18px;
@@ -31,4 +40,13 @@
    text-decoration: none;
    color : #fff;
    font-family: inherit;
+   padding: 10px;
+   border: 1px solid white;
+}
+.logOut{
+    color: #fff;
+    background: inherit;
+    font-size: 20px;
+
+    border-radius: 4px;
 }

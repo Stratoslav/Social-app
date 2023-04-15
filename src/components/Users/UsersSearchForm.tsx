@@ -1,7 +1,7 @@
 import React, { FC } from 'react';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import { FilterType } from '../../redux/create-reducer';
-
+import s from './Users.module.css'
 type PropsType = {
   onFilterChanged: (filter: FilterType) => void;
 };
@@ -17,24 +17,23 @@ export const UsersSearchForm: FC<PropsType> = ({ onFilterChanged }) => {
 
   return (
     <div>
-      <h1>Any place in your app!</h1>
+     
       <Formik enableReinitialize initialValues={{ term: '' }} onSubmit={submit}>
         {({ isSubmitting }) => (
-          <Form>
-            <Field type="text" name="term" />
-            <Field name="friend" as="select">
-              <option value="red">Friends</option>
-              <option value="green">All</option>
-              <option value="blue">Blue</option>
-            </Field>
+          <Form className={s.userForm}>
+            <label className={s.userLabelForm}>
+              find user
+  <Field className={s.userFieldForm} type="text" name="term" />
+            </label>
+          
             <ErrorMessage name="term" component="div" />
-            <button type="submit" disabled={isSubmitting}>
+            <button className={s.userButtonForm}  type="submit" disabled={isSubmitting}>
               Find
             </button>
           </Form>
         )}
       </Formik>
-      );
+     
     </div>
   );
 };

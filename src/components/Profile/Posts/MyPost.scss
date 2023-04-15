@@ -13,20 +13,20 @@
   &_New {
     text-align: center;
   }
-  &_All{
+  &_All {
     text-align: center;
     margin-top: 60px;
   }
-  &_List{
+  &_List {
     display: flex;
-    justify-content: space-between;
-      list-style: none;
-      padding: 0;
-      flex-wrap: wrap;
-      &Items{
-          width: 400px;
-          max-width: 100%;
-      }
+    justify-content: center;
+    list-style: none;
+    padding: 0;
+    flex-wrap: wrap;
+    &Items {
+      width: 400px;
+      max-width: 100%;
+    }
   }
 }
 
@@ -107,14 +107,15 @@
     font-size: 14px;
     line-height: 25px;
     color: var(--group-color);
-    background: var(--group-background);
-    border: 1px solid var(--group-border);
+    color: #ffffff;
+    background: #000000;
+    border: 1px solid #000000;
     transition: background 0.3s ease, border 0.3s ease, color 0.3s ease;
   }
   &:focus-within {
     & > span {
-      color: var(--group-color-focus);
-      background: var(--group-background-focus);
+      color: white;
+      background: rgb(51, 51, 51);
       border-color: var(--group-border-focus);
     }
   }
@@ -132,7 +133,17 @@ html {
     box-sizing: inherit;
   }
 }
-
+.buttonPost {
+  text-align: center;
+  padding: 8px 12px;
+  font-size: 14px;
+  line-height: 25px;
+  color: var(--group-color);
+  color: #ffffff;
+  background: #000000;
+  border-radius: 4px;
+  margin-bottom: 9px;
+}
 body {
   .formGroup {
     max-width: 360px;

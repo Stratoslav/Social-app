@@ -7,7 +7,7 @@ export const MessagesUserUI = () => {
   const users = useSelector(getAllUsers);
   return (
     <div>
-      {users.map(({ id, names }) => {
+      {users.map(({ id, name }) => {
         return (
           <li key={id} className={style.Messages_Content}>
             <NavLink
@@ -15,7 +15,7 @@ export const MessagesUserUI = () => {
               activeClassName={style.Messages_Active}
               to={`/messages/${id}`}
             >
-              {names}
+              {name}
             </NavLink>
           </li>
         );
