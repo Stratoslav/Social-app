@@ -1,12 +1,12 @@
-import React, { Component, useState } from 'react';
-import { Form, Formik, Field, ErrorMessage } from 'formik';
-import { connect } from 'react-redux';
+import React, { Component, SetStateAction, useState } from 'react';
+import { Form, Formik, Field, ErrorMessage, FormikValues } from 'formik';
+import { connect, useSelector } from 'react-redux';
 import LoginError from './LoginError';
 import * as Yup from 'yup';
 import { login } from '../../API/API';
 import { Redirect } from 'react-router';
 import { getIsAuth, getUrlCaptcha } from '../../redux/create-selector';
-
+import { RootState } from '../../redux/store';
 const SignupSchema = Yup.object().shape({
   email: Yup.string()
     .min(2, 'Too Short!')
@@ -15,15 +15,15 @@ const SignupSchema = Yup.object().shape({
   password: Yup.string().required('Required'),
   rememberMe: Yup.boolean().required('Required'),
 });
-
-const LoginUI = ({ login, captchaUrl, isAuth }) => {
-  const savedValues = {
-    email: 'stas.kurbanov03@gmail.com',
-    password: '',
-    rememberMe: false,
+type FormikSubmitHandler<V> = (value: object, actions: any) => void;
+const LoginUI = ({ login, captchaUrl, isAuth }: any) => {
+  const savedValues: SetStateAction<any> = {
+    email: 'stas.kurbanov03@gmail.com' as any,
+    password: '' as any,
+    rememberMe: false as any,
   };
   console.log(isAuth);
-  const onSubmit = (values, { setFieldError, setSubmitting, setStatus }) => {
+  const onSubmit: FormikSubmitHandler<any> = (values: FormikValues, { setFieldError, setSubmitting, setStatus }: any): JSX.Element | undefined | Promise<unknown> => {
     login(
       values.email,
       values.password,
@@ -119,16 +119,15 @@ const LoginUI = ({ login, captchaUrl, isAuth }) => {
   );
 };
 
-class Login extends Component {
-  render() {
-    const { login, captchaUrl, isAuth } = this.props;
-    return <LoginUI login={login} captchaUrl={captchaUrl} isAuth={isAuth} />;
-  }
-}
+const Login = () => {
+  const { captchaUrl, isAuth } = useSelector((s: RootState) => s.auth);
+  // const { login, captchaUrl, isAuth } = this.props;
+  return <LoginUI login={login} captchaUrl={captchaUrl} isAuth={isAuth} />;
+};
 
-const mapStateToProps = state => ({
-  captchaUrl: getUrlCaptcha(state),
-  isAuth: getIsAuth(state),
-});
+// const mapStateToProps = state => ({
+//   captchaUrl: getUrlCaptcha(state),
+//   isAuth: getIsAuth(state),
+// });
 
-export default connect(mapStateToProps, { login: login })(Login);
+export default connect(null, { login: login })(Login);

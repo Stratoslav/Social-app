@@ -1,11 +1,12 @@
 import { configureStore, combineReducers } from '@reduxjs/toolkit';
 import { persistStore, persistReducer } from 'redux-persist'
 import storage from 'redux-persist/lib/storage'
-import {  userReducer , authReducer, appReducer } from './create-reducer';
+import {  userReducer , appReducer } from './create-reducer';
 import { findUserReducer } from './slice/findUserSlice';
 import { profileReducer } from './slice/profileSlice';
 import { messageReducer } from './slice/messageSlice';
 import { chatReducer } from './slice/chatSlice';
+import { authReducer } from './slice/authSlice';
 
 const persistConfig = {
   key: 'root',
