@@ -1,6 +1,6 @@
 import style from '../Header/Header.module.css';
 import { NavLink } from 'react-router-dom';
-import { useDispatch, useSelector } from 'react-redux';
+import {  useSelector } from 'react-redux';
 import { getIsAuth, getLogin, } from '../../redux/create-selector';
 import { logout } from '../../API/API';
 import { Layout, Menu } from 'antd';

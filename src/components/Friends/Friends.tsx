@@ -51,7 +51,7 @@ export const Friends = () => {
       pathname: '/friends',
       search: `?term=${findUsers.filter}&page=${findUsers.currentPage}&friends=&true`,
     });
-  }, [findUsers]);
+  }, [findUsers, history]);
 
   const onCurrentPage = (pageNumber: number) => {
     dispatch(getUsers(userCount, pageNumber, findUsers.filter.term));

@@ -28,25 +28,3 @@ export const getAuthorizationUser = (): ThunkType  => async dispatch => {
     });
   };
   
-//   export const login =
-//   (
-//     email,
-//     password,
-//     rememberMe,
-//     captcha,
-//     setSubmitting,
-//     setFieldError,
-//     setStatus,
-//   ): ThunkType =>
-//    async dispatch => {
-//     const response = await instance.post(`auth/login`
-//      , { email,password,rememberMe,captcha,}
-//     );
-
-//     if (response.data.resultCode === 0) {
-//       dispatch(getAuthorizationUser());
-//     } else if (response.data.resultCode === 10) {
-//       dispatch(getCaptchaUrl());
-//       setStatus(response.data.messages);
-//     }
-//   };

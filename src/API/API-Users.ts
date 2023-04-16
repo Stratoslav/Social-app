@@ -72,17 +72,5 @@ export const getUnfollowUsers =
     }
   };
 
-// export const getUserFriend =
-//   (userId: number): ThunkType =>
-//   async dispatch => {
-//     let response = await instance.get<DefaultType>(
 
-//       `follow/${userId}`,
-//     );
-//     if (userId) {
-//       console.log(response)
-//       dispatch(findUserAction.getFriends(userId));
-         
-//     }
-//     };
   

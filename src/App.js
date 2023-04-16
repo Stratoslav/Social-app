@@ -4,8 +4,10 @@ import 'antd/dist/antd.css';
 import { Layout, Menu, Breadcrumb } from 'antd';
 import {
   UserOutlined,
+  UserAddOutlined,
   LaptopOutlined,
   NotificationOutlined,
+  FileOutlined,
 } from '@ant-design/icons';
 
 import {
@@ -26,6 +28,7 @@ import SpinnerLoader from './common/Spinner/Spinner';
 import { Button } from 'antd/lib/radio';
 import Login from './components/Login/Login';
 import { setInitialized } from './redux/create-selector';
+import News from './components/News/News';
 
 const Profile = lazy(() => import('./components/Profile/Profile'));
 const Chat = lazy(() => import('./page/Chat/ChatPage'));
@@ -86,12 +89,12 @@ export const App = () => {
                     </Menu.Item>
                     <Menu.Item key="3"></Menu.Item>
                   </SubMenu>
-                  <SubMenu key="sub4" icon={<UserOutlined />} title="Music">
+                  <SubMenu key="sub4" icon={<FileOutlined />} title="News">
                     <Menu.Item key="4">
-                      <NavLink to="/music">Music</NavLink>
+                      <NavLink to="/news">News</NavLink>
                     </Menu.Item>
                   </SubMenu>
-                  <SubMenu key="sub2" icon={<LaptopOutlined />} title="Users">
+                  <SubMenu key="sub2" icon={<UserAddOutlined />} title="Users">
                     <Menu.Item key="7">
                       <NavLink to="/users">Users</NavLink>
                     </Menu.Item>
@@ -128,6 +131,7 @@ export const App = () => {
                   <Route path="/login" render={() => <Login />} />
                   <Route path="/chat" render={() => <Chat />} />
                   <Route path="/music" render={() => <Music />} />
+                  <Route path="/news" render={() => <News />} />
                   <Route
                     path="*"
                     render={() => (

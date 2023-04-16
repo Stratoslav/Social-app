@@ -1,9 +1,8 @@
-import { useAppDispatch } from '../redux/hooks';
 import axios from 'axios';
 import { actions } from '../redux/create-actions';
 import { profileAction } from '../redux/slice/profileSlice';
 import { AppDispatch } from '../redux/store';
-import { Redirect, Route, useHistory } from 'react-router-dom';
+
 
 export const instance = axios.create({
   withCredentials: true,
