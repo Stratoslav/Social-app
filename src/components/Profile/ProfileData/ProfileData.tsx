@@ -1,12 +1,13 @@
-import React, { FC } from 'react';
+import React, { FC, useEffect } from 'react';
 import style from './ProfileData.module.css';
 import Button from '../../../common/Spinner/Button.module.css';
 import ProfileStatus from '../ProfileStatus/ProfileStatus';
-import { connect } from 'react-redux';
+import { connect, useDispatch, useSelector } from 'react-redux';
 import { updateStatus } from '../../../API/API';
 import { getUserStatus } from '../../../redux/create-selector';
-import { AppStateReducer } from '../../../redux/store';
-
+import { AppStateReducer, RootState } from '../../../redux/store';
+import button from '../../../common/Spinner/Button.module.css'
+import { profileAction, profileReducer } from '../../../redux/slice/profileSlice';
 type Props = {
   profile: any;
   isOwner: boolean;
@@ -14,7 +15,6 @@ type Props = {
   updateStatus: (statusProfile: any) => void;
   status: any;
 };
-
 const ProfileData = ({
   profile,
   isOwner,
@@ -22,7 +22,16 @@ const ProfileData = ({
   updateStatus,
   status,
 }: Props) => {
-  console.log(Object(profile.contacts))
+  let hasNaN: unknown[] | null = Object.values(profile.contacts).includes(null) ? Object.values(profile.contacts).filter((p: any) => p !== null) : null
+  console.log(isOwner)
+
+  const dispatch = useDispatch()
+
+  useEffect(() => {
+    dispatch(profileAction.setName(profile.fullName))
+
+  }, [dispatch, profile])
+
   return (
     <div className={style.Data}>
       <ul className={style.DataList}>
@@ -48,9 +57,9 @@ const ProfileData = ({
             Не указано
           </div>
         )}
-        <ProfileStatus status={status} updateStatus={updateStatus} />
+        <ProfileStatus status={status} isOwner={isOwner} updateStatus={updateStatus} />
         <div>
-          <b>Contacts:</b>
+          <b>Contacts:{hasNaN?.length === 0 ? <button onClick={goToEditMode} className={button.button}>Add data</button> : null}</b>
         
         {Object.keys(profile.contacts).map(key => {
           return (
@@ -65,13 +74,13 @@ const ProfileData = ({
         </div>
       </ul>
 
-      {isOwner || (
+      {isOwner && hasNaN?.length !== 0 ? (
         <div>
           <button className={Button.button} onClick={goToEditMode}>
             Edit Data
           </button>
         </div>
-      )}
+      ) : undefined}
     </div>
   );
 };

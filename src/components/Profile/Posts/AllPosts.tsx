@@ -23,7 +23,7 @@ export default function AllPosts() {
                 alt=""
               />
               <h3>{post.name}</h3>
-              <div>{post.message}</div>
+              <p>{post.message}</p>
               <button className='buttonPost' onClick={() => dispatch(profileAction.deletePost(post.id))}>Delete</button>
             </li>
           );

@@ -42,7 +42,7 @@ const ProfilePage: FC<Props> = ({
             alt=""
           />
         </a>
-        {isOwner || (
+        {isOwner && (
           <div className={style.input__wrapper}>
             <input
               onChange={onMainPhotoSelected}

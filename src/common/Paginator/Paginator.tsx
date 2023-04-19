@@ -6,7 +6,7 @@ import styles from '../../components/Users/Users.module.css';
 type Props = {
   totalCount: number,
   userCount: number,
-  onCurrentPage: (PageNumber: number) => void ,
+  onCurrentPage?: (PageNumber: number) => void ,
   currentPage: number,
   portionSize?: number,
 }
@@ -36,12 +36,13 @@ const Paginator: React.FC<Props> = ({
         <span onClick={() => setPortionNumber(portionNumber - 1)}>
           &laquo;
         </span>
-      )}
+        )}
+        
       {pages.filter(page => page >= leftPortionNumber && page <= rightPortionNumber).map(page => {
         return (
           <span key={shortid.generate()}
             className={currentPage === page ? styles.active : undefined}
-            onClick={() => onCurrentPage(page)}
+            onClick={() => (onCurrentPage !== undefined && onCurrentPage(page))}
           >
             {page}
           </span>

@@ -64,7 +64,7 @@ class Profile extends Component<PropsType, StateType> {
         <ProfilePage
           saveProfile={saveProfile}
           savePhoto={savePhoto}
-          isOwner={!!this.props.match.params.userId}
+          isOwner={!this.props.match.params.userId}
           profile={profile}
         />
 

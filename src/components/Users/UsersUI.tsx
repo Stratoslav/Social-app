@@ -10,11 +10,7 @@ import { useHistory } from 'react-router';
 import queryString from 'querystring';
 import {
   getCountUsers,
-  getCurrentPage,
-  getFilter,
-  getFindUser,
-  getPreloader,
-  getTotalCount,
+
 } from '../../redux/create-selector';
 import {
   getFollowUsers,
@@ -53,7 +49,7 @@ export const UsersUInterfece = () => {
       pathname: '/users',
       search: `?term=${findUsers.filter}&page=${findUsers.currentPage}`,
     });
-  }, [findUsers]);
+  }, [findUsers, history]);
 
   const onCurrentPage = (pageNumber: number) => {
     dispatch(getUsers(userCount, pageNumber, findUsers.filter.term));

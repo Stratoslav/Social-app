@@ -29,6 +29,8 @@ type ProfileType = {
     profile: null | Array<ProfileDesctType>,
     status: string | null,
     userPhoto: null | string,
+    errorMessage: string[],
+    userName: string | any
 }
 const initialState: ProfileType = {
     posts: [ { name: 'Alla', message: 'Its my first posts', id: 1 },
@@ -38,6 +40,8 @@ const initialState: ProfileType = {
     profile: [],
     status:  "",
     userPhoto: null,
+    errorMessage: [],
+     userName: ""
 }
 
 const profileSlice = createSlice({
@@ -45,16 +49,18 @@ const profileSlice = createSlice({
     initialState,
     reducers: {
         addPost: (state, action: PayloadAction<any>) => {
-    //    const fullName =  state.profile?.map(s => s.fullName[0])
-        //    console.log(fullName)
+            
+            console.log(state.userName)
             const newPost = {
-        name: "no" ,
+                name: state.userName,
         id: Math.random(),
         message: action.payload,
       };
          state.posts.push(newPost)
               
         },
+    
+      
         setUserProfile: (state, action: PayloadAction<any>) => {
             state.profile = action.payload
         },
@@ -69,7 +75,15 @@ const profileSlice = createSlice({
            
                return post.id !== action.payload 
             })
-        }
+        },
+        getErrorMessage: (state, action: PayloadAction<any>) => {
+            console.log(action.payload)
+            state.errorMessage = action.payload
+        }, 
+         setName: (state, action: PayloadAction<any>) => {
+            // console.log(action.payload)
+            state.userName = action.payload
+        }, 
     }
 })
 

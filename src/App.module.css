@@ -25,3 +25,7 @@ li{
 .Content {
   grid-area: content;
 }
+
+#root{
+  height: 100%;
+}

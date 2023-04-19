@@ -6,6 +6,7 @@ import { findUserReducer } from './slice/findUserSlice';
 import { profileReducer } from './slice/profileSlice';
 import { messageReducer } from './slice/messageSlice';
 import { chatReducer } from './slice/chatSlice';
+import { newsReducer } from './slice/newsReducer';
 
 const persistConfig = {
   key: 'root',
@@ -20,7 +21,8 @@ const rootReducer = combineReducers({
   findUsers: findUserReducer,
   auth: authReducer,
   app: appReducer,
-chat : chatReducer
+  chat: chatReducer,
+news: newsReducer
 })
 
 type RootReducerType = typeof rootReducer

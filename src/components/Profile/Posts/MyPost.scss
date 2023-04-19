@@ -19,13 +19,19 @@
   }
   &_List {
     display: flex;
-    justify-content: center;
+    // justify-content: center;
+    width: 400px;
+    max-width: 400px;
+    margin: 0 auto;
     list-style: none;
     padding: 0;
     flex-wrap: wrap;
     &Items {
+      border-top: 1px solid #cbcbcb;
       width: 400px;
-      max-width: 100%;
+      overflow: hidden;
+      max-width: 400px;
+      padding: 5px 0;
     }
   }
 }

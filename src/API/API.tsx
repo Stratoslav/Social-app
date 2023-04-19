@@ -123,6 +123,7 @@ export const saveProfile =
     if (response.data.resultCode === 0) {
       dispatch(setUserProfile(userId));
     } else if (response.data.resultCode === 1) {
+      dispatch(profileAction.getErrorMessage(response.data.messages))
       setStatus(response.data.messages);
       debugger;
     }

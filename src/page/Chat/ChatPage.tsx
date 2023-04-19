@@ -8,7 +8,7 @@ import {
 } from '../../API/API-Chat';
 import { AppStateReducer } from '../../redux/store';
 import shortid from 'shortid';
-
+import s from './Chat.module.css'
 export type ChatMessageType = {
   message: string;
   photo: string;
@@ -61,12 +61,16 @@ const Messages: FC<{}> = () => {
 
 const Message: FC<{ message: ChatMessageType }> = React.memo(({ message }) => {
   return (
-    <div>
-      <div>
-        <img src={message.photo} alt="" /> <span>{message.userName}</span>
+    <div className={s.messageChatWrapper}>
+     
+        <img src={message.photo} alt="" />
+        <div  style={{marginLeft:"15px"}}>
+ <h5 >{message.userName}</h5>
         <br style={{ borderBottom: '1000px solid #000' }} />
         <p>{message.message}</p>
-      </div>
+        </div>
+       
+    
     </div>
   );
 });
@@ -80,17 +84,18 @@ const AddNewMessage: FC<{}> = () => {
     setMessage('');
   };
   return (
-    <div>
-      <div>
+    <div className={s.chatWrapper}>
+     
         <textarea
+          className={s.textAreaMessage}
           onChange={e => setMessage(e.currentTarget.value)}
           value={message}
           placeholder="Write"
         ></textarea>
-      </div>
-      <div>
-        <button disabled={status !== 'ready'} onClick={sendMessageHandler}>Send</button>
-      </div>
+    
+    
+        <button className={s.chatButton} disabled={status !== 'ready'} onClick={sendMessageHandler}>Send</button>
+     
     </div>
   );
 };

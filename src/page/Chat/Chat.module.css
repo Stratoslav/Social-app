@@ -1,0 +1,26 @@
+.textAreaMessage{
+        height: 40px;
+        max-height: 40px;
+            background: inherit;
+            border: 1px solid #c2c2c2;
+            width: 500px;
+}
+
+.chatWrapper{
+    height: 40px;
+    display: flex;
+    align-items: center;
+}
+
+.chatButton{
+    color: #fff;
+    background-color: #001529;
+    font-size: 18px;
+    border: none;
+    padding: 6px 10px;
+}
+
+.messageChatWrapper {
+    display: flex;
+padding: 10px 0;
+}
