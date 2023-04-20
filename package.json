@@ -29,7 +29,7 @@
     "reselect": "^4.0.0",
     "script": "^0.1.4",
     "shortid": "^2.2.16",
-    "typescript": "^5.0.4",
+    "typescript": "^4.8.4",
     "web-vitals": "^1.1.2",
     "yup": "^0.32.11"
   },
