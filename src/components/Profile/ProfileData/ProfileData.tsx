@@ -23,7 +23,7 @@ const ProfileData = ({
   status,
 }: Props) => {
   let hasNaN: unknown[] | null = Object.values(profile.contacts).includes(null) ? Object.values(profile.contacts).filter((p: any) => p !== null) : null
-
+  // console.log(isOwner)
 
   const dispatch = useDispatch()
 

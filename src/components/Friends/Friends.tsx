@@ -80,7 +80,7 @@ export const Friends = () => {
       />
 
       <ul>
-        {findUsers.getFriends.map(({ id, followed, photos, name }) => {
+        {findUsers.getFriends.map(({ id, followed, photos, name }: any) => {
           return (
             <li key={id}>
                <div className={s.userInfoWrapper}>

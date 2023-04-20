@@ -29,10 +29,12 @@ const ProfilePage: FC<Props> = ({
       savePhoto(e.target.files[0]);
     }
   };
+  console.log(isOwner)
   return (
     <section className={style.ProfilePage}>
-      <div className={style.ChangeProilePhoto}>
-        <a target="blank" href={profile.photos.large}>
+    
+       <div className={style.ChangeProilePhoto}>
+      <a target="blank" href={profile.photos.large}> 
           <img
             className={style.profileAvatar}
             src={
@@ -41,7 +43,7 @@ const ProfilePage: FC<Props> = ({
             }
             alt=""
           />
-        </a>
+         </a> 
         {isOwner && (
           <div className={style.input__wrapper}>
             <input

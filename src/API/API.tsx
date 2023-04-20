@@ -84,6 +84,7 @@ export const logout = () => async (dispatch: AppDispatch) => {
 
 export const setUserProfile = (userId:any) => async (dispatch: AppDispatch) => {
   let response = await instance.get(`profile/${userId}`);
+  console.log(response.data)
   dispatch(profileAction.setUserProfile(response.data));
 };
 

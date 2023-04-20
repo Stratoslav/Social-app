@@ -27,4 +27,3 @@ export const getAuthorizationUser = (): ThunkType  => async dispatch => {
       dispatch(actions.INITIALIZATION_SUCCESS());
     });
   };
-  
