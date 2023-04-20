@@ -18,7 +18,8 @@ const messageSlice = createSlice({
     name: "messages",
     initialState,
     reducers: {
-        addNewMessage: (state, action: PayloadAction<any>) => {
+        addNewMessage: (state, action: PayloadAction<string>) => {
+          
             state.messageNewBody = action.payload;
             const newMessage = {
         id: Math.random(),

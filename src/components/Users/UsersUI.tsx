@@ -15,7 +15,7 @@ import {
 import {
   getFollowUsers,
   getUnfollowUsers,
-  // getUserFriend,
+
   getUsers,
 } from '../../API/API-Users';
 import { RootState } from '../../redux/store';

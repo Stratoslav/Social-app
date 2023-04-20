@@ -15,7 +15,7 @@ export const getAuthorizationUser = (): ThunkType  => async dispatch => {
     let response = await instance.get<getAuthorizationUserType>(`auth/me`);
     if (response.data.resultCode === 0) {
       const { id, login, email } = response.data.data;
-      console.log(response.data);
+
       dispatch(actions.SET_AUTH_USER_DATA(id, login, email, true));
     }
   };

@@ -19,11 +19,10 @@ const SignupSchema = Yup.object().shape({
 
 const LoginUI = ({ login, captchaUrl, isAuth }) => {
   const savedValues = {
-    email: 'stas.kurbanov03@gmail.com',
+    email: '',
     password: '',
     rememberMe: false,
   };
-  console.log(isAuth);
   const onSubmit = (values, { setFieldError, setSubmitting, setStatus }) => {
     login(
       values.email,

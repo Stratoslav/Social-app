@@ -12,7 +12,26 @@ interface ProfileI {
     filter: { term: string },
     userCount: number
 }
-
+type UserType = {
+    followed
+: 
+boolean
+id
+: 
+number
+name
+: 
+string | null
+photos
+: 
+{small: null | string, large: null | string}
+status
+: 
+null | string
+uniqueUrlName
+: 
+null | string
+}
 const initialState: ProfileI = {
     findUsers: [],
     getFriends: [],
@@ -30,12 +49,12 @@ export const findUserSlice = createSlice({
     name: "profile",
     initialState,
     reducers: {
-        setUsers: (state, action: PayloadAction<any>) => {
+        setUsers: (state, action: PayloadAction<UserType[]>) => {
+           
             state.findUsers = [...action.payload]
         },
         getFriends: (state, action: PayloadAction<any>) => {
-            console.log(action.payload)
-            console.log(state.getFriends)
+           
             state.getFriends = [...action.payload]
         },
         setCurrentPage: (state, action: PayloadAction<number>) => {

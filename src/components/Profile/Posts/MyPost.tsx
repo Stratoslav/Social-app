@@ -7,8 +7,6 @@ import classNames from 'classnames';
 
 import { profileAction } from '../../../redux/slice/profileSlice';
 import { useAppDispatch } from '../../../redux/hooks';
-import { useSelector } from 'react-redux';
-import { RootState } from '../../../redux/store';
 
 const MyPosts = () => {
   const dispatch = useAppDispatch()

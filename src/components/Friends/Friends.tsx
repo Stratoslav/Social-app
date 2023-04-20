@@ -14,15 +14,13 @@ import {
 import {
   getFollowUsers,
   getUnfollowUsers,
-  // getUserFriend,
+ 
   getUsers,
 } from '../../API/API-Users';
 import { RootState } from '../../redux/store';
 import s from '../Users/Users.module.css'
 export const Friends = () => {
   const userCount = useSelector(getCountUsers);
-  console.log(userCount)
-  // const friendsCount = useSelector((s: RootState) => s.findUsers.friendsTotalCount)
   const {findUsers} = useSelector((s: RootState) => s)
 
   const dispatch = useDispatch();

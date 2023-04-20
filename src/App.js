@@ -1,3 +1,4 @@
+/* eslint-disable no-restricted-globals */
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import React, { lazy, Suspense, useEffect } from 'react';
 import 'antd/dist/antd.css';
@@ -10,7 +11,6 @@ import {
   MailOutlined,
   TeamOutlined,
 } from '@ant-design/icons';
-
 import {
   BrowserRouter,
   Route,
@@ -26,7 +26,6 @@ import { initializedApp } from './API/API';
 
 import SpinnerLoader from './common/Spinner/Spinner';
 
-import { Button } from 'antd/lib/radio';
 import Login from './components/Login/Login';
 import { setInitialized } from './redux/create-selector';
 import News from './components/News/News';
@@ -36,14 +35,14 @@ const Chat = lazy(() => import('./page/Chat/ChatPage'));
 const HeaderTop = lazy(() => import('./components/Header/Header'));
 const Users = lazy(() => import('./components/Users/Users'));
 
-const { Content, Footer, Sider } = Layout;
+const { Content, Sider } = Layout;
 
 export const App = () => {
   const initialized = useSelector(setInitialized);
 
   const dispatch = useDispatch();
   const { userId } = useSelector(s => s.auth);
-  console.log(userId);
+
   useEffect(() => {
     dispatch(initializedApp());
   }, [dispatch]);

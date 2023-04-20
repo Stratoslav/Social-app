@@ -60,8 +60,6 @@ const ProfileDataForm = ({ profile, saveProfile, goToEditMode }) => {
             </div>
 
             <div style={{ margin: 0 }}>
-              {/* <p>{profile.aboutMe}</p> */}
-
               <Field
                 className={s.contactsInput}
                 type="text"
@@ -75,8 +73,6 @@ const ProfileDataForm = ({ profile, saveProfile, goToEditMode }) => {
               <ErrorMessage name="AboutMe" component={LoginError} />
             </div>
             <div>
-              {/* <p>{profile.lookingForAJobDescription}</p> */}
-
               <Field
                 className={s.contactsInput}
                 type="text"
@@ -142,7 +138,6 @@ const ProfileDataForm = ({ profile, saveProfile, goToEditMode }) => {
               </button>
             </div>
           </section>
-          {/* ???????????????????????????????????????????????????????????????????? */}
         </Form>
       )}
     </Formik>

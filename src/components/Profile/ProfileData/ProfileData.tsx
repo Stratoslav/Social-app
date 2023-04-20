@@ -2,12 +2,12 @@ import React, { FC, useEffect } from 'react';
 import style from './ProfileData.module.css';
 import Button from '../../../common/Spinner/Button.module.css';
 import ProfileStatus from '../ProfileStatus/ProfileStatus';
-import { connect, useDispatch, useSelector } from 'react-redux';
+import { connect, useDispatch } from 'react-redux';
 import { updateStatus } from '../../../API/API';
 import { getUserStatus } from '../../../redux/create-selector';
-import { AppStateReducer, RootState } from '../../../redux/store';
+import { AppStateReducer } from '../../../redux/store';
 import button from '../../../common/Spinner/Button.module.css'
-import { profileAction, profileReducer } from '../../../redux/slice/profileSlice';
+import { profileAction } from '../../../redux/slice/profileSlice';
 type Props = {
   profile: any;
   isOwner: boolean;
@@ -23,7 +23,7 @@ const ProfileData = ({
   status,
 }: Props) => {
   let hasNaN: unknown[] | null = Object.values(profile.contacts).includes(null) ? Object.values(profile.contacts).filter((p: any) => p !== null) : null
-  console.log(isOwner)
+
 
   const dispatch = useDispatch()
 

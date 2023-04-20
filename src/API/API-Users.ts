@@ -30,8 +30,7 @@ export const getUsers =
     let res = await instance.get<getUsersType>(
         `users?count=${userCount}&page=${currentPage}&term=${term}&friend=${true}`,
     )
-    console.log(res.data.totalCount)
-    
+   
     dispatch(findUserAction.setPreloader(false));
     dispatch(findUserAction.getFriends(res.data.items))
     dispatch(findUserAction.setCurrentPage(currentPage));
@@ -51,8 +50,7 @@ export const getFollowUsers =
     if (response.data.resultCode === 0) {
       dispatch(findUserAction.setPreloader(true));
       dispatch(findUserAction.followUnfollow(id));
-      // dispatch(findUserAction.setUsers)
-      // dispatch(findUserAction.addFriendUser(id))
+      
       setTimeout(() => {
         dispatch(findUserAction.setPreloader(false));
       }, 1000);

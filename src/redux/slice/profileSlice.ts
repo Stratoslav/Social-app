@@ -48,9 +48,8 @@ const profileSlice = createSlice({
     name: "profile", 
     initialState,
     reducers: {
-        addPost: (state, action: PayloadAction<any>) => {
-            
-            console.log(state.userName)
+        addPost: (state, action: PayloadAction<string>) => {
+           
             const newPost = {
                 name: state.userName,
         id: Math.random(),
@@ -62,12 +61,13 @@ const profileSlice = createSlice({
     
       
         setUserProfile: (state, action: PayloadAction<any>) => {
+            
             state.profile = action.payload
         },
-        setStatus: (state, action) => {
+        setStatus: (state, action: PayloadAction<string>) => {
             state.status = action.payload
         },
-        setUserPhoto: (state, action) => {
+        setUserPhoto: (state, action: PayloadAction<string>) => {
            state.userPhoto = action.payload
         },
         deletePost: (state, action: PayloadAction<number>) => {
@@ -80,8 +80,8 @@ const profileSlice = createSlice({
             console.log(action.payload)
             state.errorMessage = action.payload
         }, 
-         setName: (state, action: PayloadAction<any>) => {
-            // console.log(action.payload)
+         setName: (state, action: PayloadAction<string>) => {
+           
             state.userName = action.payload
         }, 
     }

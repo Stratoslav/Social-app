@@ -11,12 +11,8 @@
 .contactsInput {
     border: 1px solid #818181;
     margin: 3px 5px 3px 0px;
-        /* margin: 3px 5px 3px 10px; */
+        
 }
 .ContactsKeyName{
     color: #877f7f;
-}
-
-.contactsButtonWrapper{
-    /* margin-left: 10px; */
 }
