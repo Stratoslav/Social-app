@@ -59,7 +59,7 @@ const ProfileData = ({
         )}
         <ProfileStatus status={status} isOwner={isOwner} updateStatus={updateStatus} />
         <div>
-          <b>Contacts:{hasNaN?.length === 0 ? <button onClick={goToEditMode} className={button.button}>Add data</button> : null}</b>
+          <b>Contacts:{hasNaN?.length === 0 && isOwner  ? <button onClick={goToEditMode} className={button.button}>Add data</button> : null}</b>
         
         {Object.keys(profile.contacts).map(key => {
           return (
