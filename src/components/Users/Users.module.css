@@ -1,0 +1,57 @@
+.currentPage{
+    font-size: 21px;
+    color: brown;
+    padding: 2px;
+}
+
+.pagination {
+    display: block;
+  }
+  
+  .pagination span {
+    cursor: pointer;
+    color: black;
+    float: left;
+    padding: 8px 16px;
+    text-decoration: none;
+    transition: background-color .3s;
+    border: 1px solid #ddd;
+    font-size: 22px;
+  }
+  
+  .pagination .active {
+    background-color:  #001529;;
+    color: white;
+    border: 1px solid #001529;
+  }
+  
+  .pagination:hover:not(.active) {background-color: #ddd;}
+.userForm{
+  align-items: center;
+  margin-bottom: 20px;
+
+}
+  .userFieldForm {
+   margin:0 5px;
+    padding: 2px 5px;
+  }
+   
+
+  
+    .userButtonForm {
+      transition: all 0.2s;
+      background-color: inherit;
+      padding: 2px 5px;
+      font-size: 18px;
+    }
+  
+    .userButtonForm:hover {
+      opacity: 1;
+      background: #001529;
+      color: rgb(234, 253, 147);
+    }
+        .userInfoWrapper {
+          display: flex;
+          align-items: flex-end;
+          margin-bottom: 20px;
+        }

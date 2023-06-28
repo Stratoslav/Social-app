@@ -1,0 +1,45 @@
+.newsPaginator {
+        border: 1px solid #001529;
+            padding: 10px 15px 10px 15px;
+            font-size: 20px;
+            color: white;
+            background: #001529;
+            display: inline-block;
+         
+}
+
+.newsPaginatorActive {
+    border: 1px solid rgb(138, 138, 138);
+    padding: 10px 15px 10px 15px;
+    font-size: 20px;
+    color: rgb(138, 138, 138);
+    background: inherit;
+    display: inline-block;
+
+}
+.newsForm {
+    display: flex;
+        justify-content: space-between;
+        width: 320px;
+        align-items: center;
+}
+.newsFormInput {
+    margin-left: 5px;
+        background: inherit;
+        border: 2px solid #001529;
+        border-radius: 4px;
+}
+.newsFormButton , .newsButtonNext{
+        border: inherit;
+            background: #001529;
+            color: #fff;
+            border: 2px solid #001529;
+            border-radius: 4px;
+            font-size: 18px;
+}
+
+.newsFormLink{
+    color: black;
+    font-size: 18px;
+    text-decoration: none;
+}

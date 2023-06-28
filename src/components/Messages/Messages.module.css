@@ -1,0 +1,42 @@
+.Messages {
+    display: grid;
+    grid-template-columns: 2fr 10fr;
+    grid-gap: 5px;
+}
+
+.Messages_Users{
+    background-color: #001529;
+    margin: 0 ;
+    padding: 20px 20px;
+    list-style: none;
+    border-radius: 5px;
+}
+.Messages_Link{
+    color: rgb(255, 255, 255);
+    text-decoration: none;
+}
+
+.Messages_Active{
+    color: rgb(234, 253, 147);
+}
+
+.Messages_Content {
+    font-size: 17px;
+    padding: 5px 0;
+}
+.messageInput {
+        background: inherit;
+            border-radius: 0;
+            margin-right: 5px;
+            padding: 4px;
+}
+.messageFormButton{
+    transition: all 0.2s ;
+    background-color: inherit;
+    padding: 4px;
+}
+.messageFormButton:hover {
+    opacity: 1;
+ background: #001529;
+ color: rgb(234, 253, 147);
+}

@@ -1,0 +1,78 @@
+.ProfilePage {
+  display: flex;
+  justify-content: center;
+  padding-top: 20px;
+}
+
+.profileAvatar {
+  width: 150px;
+  height: 150px;
+}
+.ChangeProilePhoto {
+  display: inline-block;
+}
+.ProfileInfo {
+  font-size: 16px;
+    color: #877f7f; 
+     font-weight: 500;
+  /* font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif; */
+}
+
+.input__wrapper {
+  width: 100%;
+  position: relative;
+  margin: 15px 0;
+  text-align: center;
+}
+
+.input__file {
+  opacity: 0;
+  visibility: hidden;
+  position: absolute;
+  background: currentColor;
+}
+
+.input__fileIcon {
+  background: #fff;
+}
+
+.input__fileIconWrapper {
+  height: 43px;
+  width: 60px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  border-right: 1px solid #fff;
+}
+
+.input__fileButtonText {
+  line-height: 1;
+}
+
+.input__fileButton {
+  width: 100%;
+  max-width: 150px;
+  height: 43px;
+  background: #000;
+  color: #ffffff;
+  font-size: 15px;
+  font-weight: 500;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-box-pack: start;
+  -ms-flex-pack: start;
+  justify-content: flex-start;
+  border-radius: 3px;
+  cursor: pointer;
+  margin: 0 auto;
+}

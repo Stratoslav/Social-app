@@ -1,0 +1,31 @@
+
+li{
+  list-style: none;
+}
+.Grid { 
+  max-width: 1200px;
+  width: 100%;
+  margin: 0 auto;
+  display: grid;
+ 
+ grid-template-areas:
+"header header header"
+"nav content content";
+ grid-template-rows: 100px 1fr;
+  grid-template-columns: 2fr 10fr;
+  grid-gap: 5px;
+  
+}
+.Header {
+  grid-area: header;
+}
+.Sidebar {
+  grid-area: nav;
+}
+.Content {
+  grid-area: content;
+}
+
+#root{
+  height: 100%;
+}

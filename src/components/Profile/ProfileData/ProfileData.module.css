@@ -1,0 +1,18 @@
+.Data{
+    padding-left: 30px;
+}
+
+.DataList{
+    padding: 0;
+}
+.ProfileList{
+    padding-left: 30px;
+}
+.contactsInput {
+    border: 1px solid #818181;
+    margin: 3px 5px 3px 0px;
+        
+}
+.ContactsKeyName{
+    color: #877f7f;
+}
